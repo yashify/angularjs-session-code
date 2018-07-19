@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS Day 3</title>
+</head>
+<body ng-app="myApp">
+
+	<div ng-controller="myCtrl">
+
+		<form name="myForm" ng-submit="submitForm()" novalidate>
+			Name:
+			<input type="text" name="txtName" ng-change="
+			chnageName()" ng-model="name" required>
+				{{myForm.txtName.$invalid}}
+
+				{{myForm.$submitted}}
+			<span ng-if="myForm.txtName.$invalid && myForm.$submitted">
+
+
+				Error
+			</span>
+			<br />
+			City:
+			<input type="text" name="txtCity" ng-model="city">
+			<br />
+			Age:
+			<input type="text" name="txtAge" ng-model="age">
+			<br />
+
+			<button type="submit">
+				Submit
+			</button>
+		</form>
+		
+	</div>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.js"></script>
+
+	<script type="text/javascript">
+		var myApp = angular.module("myApp", []);
+
+		myApp.controller("myCtrl", function($scope) {
+
+			$scope.name = "";
+
+			$scope.submitForm = function(){
+
+			};			
+
+			$scope.chnageName =function(){
+				if($scope.name.length > 0){
+					// myForm.$setPristine();
+				};
+			};
+		});
+	</script>
+</body>
+
+</html>

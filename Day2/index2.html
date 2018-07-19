@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS Day 1</title>
+</head>
+<body ng-app="myApp">
+
+	<div ng-controller="myFirstCtrl as myFirst">
+		<div ng-controller="mySecondCtrl as mySecond">
+			<p>{{ myFirst.city }}</p>
+			<p>{{ mySecond.city }}</p>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.js"></script>
+
+	<script type="text/javascript">
+
+		var myApp = angular.module("myApp", []);
+
+		myApp.controller("myFirstCtrl", function() {
+
+			var self = this;
+
+			self.city = "ABC";
+
+		});
+
+		myApp.controller("mySecondCtrl", function() {
+
+			var self = this;
+
+			self.city = "XYZ";
+
+		});
+
+	</script>
+</body>
+
+</html>

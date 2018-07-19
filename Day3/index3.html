@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS Day 3</title>
+</head>
+<body ng-app="myApp">
+
+	<div ng-controller="myCtrl">		
+
+		<input type="text" name="txtName" ng-model="name">
+		
+		<button ng-click="trigger()">
+			Click Me
+		</button>
+	</div>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.js"></script>
+
+	<script type="text/javascript">
+		var myApp = angular.module("myApp", []);
+
+		myApp.controller("myCtrl", function($scope) {
+			$scope.trigger = function(){
+				$scope.$broadcast("my-custom-event", $scope.name);
+			}
+
+			$scope.$on("my-custom-event", function(evt, data){
+				// console.log(evt.stopPropogation());
+				console.log(data);
+			});
+		});		
+	</script>
+</body>
+
+</html>

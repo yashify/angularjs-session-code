@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS Day 3</title>
+</head>
+<body ng-app="myApp">
+
+	<div ng-controller="myCtrl">
+
+		<form name="myForm" ng-submit="submitForm()" novalidate>
+			Name:
+			<input type="text" name="txtNumber" ng-model="number" required integer>				
+				<span ng-if="myForm.txtNumber.$invalid && myForm.$submitted">
+					Error in field
+				</span>			
+			<br />
+			<button type="submit">
+				Submit
+			</button>
+		</form>
+		
+	</div>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.js"></script>
+
+	<script type="text/javascript">
+		var myApp = angular.module("myApp", []);
+
+		myApp.controller("myCtrl", function($scope) {
+			
+		});
+
+		myApp.directive("integer", function() {
+			var INTEGER_REGEXP = /^-?\d+$/;
+			return {
+			    require: 'ngModel',
+			    link: function(scope, elm, attrs, ctrl) {
+			      ctrl.$validators.integer = function(modelValue, viewValue) {
+			        if (ctrl.$isEmpty(modelValue)) {
+			          // consider empty models to be valid
+			          return true;
+			        }
+
+			        if (INTEGER_REGEXP.test(viewValue)) {
+			          // it is valid
+			          return true;
+			        }
+
+			        // it is invalid
+			        return false;
+			      };
+			    }			  
+			}
+		});
+	</script>
+</body>
+
+</html>

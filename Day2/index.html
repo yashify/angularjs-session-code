@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS Day 1</title>
+</head>
+<body ng-app="myApp">
+
+	<div ng-controller="myCtrl">
+		<p>{{ city }}</p>
+		<button ng-click="myClick()">Click</button>
+	</div>
+
+	<div ng-controller="mySecondCtrl">
+		{{ name }}
+		<p ng-bind="name"></p>
+		<input type="text" name="name" ng-model="name" ng-change="changeFunc()">
+		{{ ::name }}
+	</div>
+
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.js"></script>
+
+	<script type="text/javascript">
+
+		// var myDemo = angular.module("myDemo", []);
+
+		var myApp = angular.module("myApp", []);
+
+		myApp.controller("myCtrl", function($scope) {
+
+			$scope.city = "Xyz";
+
+			$scope.$watch("city", function(oldVal, newVal){
+				console.log(newVal);
+				console.log(oldVal);
+
+				if(oldVal != newVal){
+					alert("change");
+				}
+			});
+
+			$scope.myClick = function(){
+				$scope.city = "PQR";					
+			};
+
+		});
+
+		myApp.controller("mySecondCtrl", function($rootScope, $scope) {
+
+			$rootScope.name = "XYZ";
+
+			$scope.changeFunc = function(){
+				console.log($scope.name);				
+			}
+		});
+	</script>
+</body>
+
+</html>
