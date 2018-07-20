@@ -43,7 +43,15 @@
 
 			$scope.name = "";
 
+			console.log(myForm);
+
 			$scope.submitForm = function(){
+
+				if(myForm.$valid){
+					console.log(789);
+				} else {
+					console.log(123);
+				}
 
 			};			
 

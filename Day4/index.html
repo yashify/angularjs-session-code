@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS Day 4</title>
+
+	<style type="text/css">
+		.demo2-class{
+			color: #F00;
+		}
+	</style>
+</head>
+<body ng-app="myApp">
+
+	<div ng-controller="myCtrl">
+		<div demo2="triggerFunc()">Hello</div>		
+	</div>
+
+	<!-- directive: demo -->
+
+	<demo>
+		Hi
+	</demo>
+
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.js"></script>
+
+	<script type="text/javascript">
+		var myApp = angular.module("myApp", []);
+
+		myApp.controller("myCtrl", function($scope){
+			$scope.triggerFunc = function(){
+				alert("Hi");
+			}
+		});		
+
+		myApp.directive("demo", function () {
+			return {			
+				restrict: "E",
+				transclude: true,
+				template:"<p> Good </p><ng-transclude>"
+			};
+		});
+
+		myApp.directive("demo2", function () {
+			return {
+				restrict: "A",
+				link: function(scope, element, attr, ctrl){
+					
+				},
+				controller: function($scope, $rootScope){
+					$scope.triggerFunc();
+				}
+			};
+		});
+	</script>
+</body>
+
+</html>

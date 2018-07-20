@@ -21,7 +21,7 @@
 
 		myApp.controller("myCtrl", function($scope) {
 			$scope.trigger = function(){
-				$scope.$broadcast("my-custom-event", $scope.name);
+				$scope.$emit("my-custom-event", $scope.name);
 			}
 
 			$scope.$on("my-custom-event", function(evt, data){
