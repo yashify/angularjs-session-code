@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS Day 5</title>	
+</head>
+<body ng-app="myApp">
+
+	<div ng-controller="myCtrl">
+		{{ city | demo }}
+	</div>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.js"></script>
+
+	<script type="text/javascript">
+		var myApp = angular.module("myApp", []);
+
+		myApp.controller("myCtrl", function($scope){
+			$scope.city = "nagpur";			
+		});		
+
+		myApp.filter("demo", function () {
+			return function(val){
+				return "Welcome to " + val.toUpperCase();
+			};
+		});		
+
+	</script>
+</body>
+
+</html>

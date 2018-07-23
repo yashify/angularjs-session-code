@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS Day 5</title>	
+</head>
+<body ng-app="myApp">
+
+	<div ng-controller="myCtrl">
+
+		<input type="file" name="flImage" file-upload upload-event-name="getImage">		
+	</div>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.js"></script>
+
+	<script type="text/javascript">
+		var myApp = angular.module("myApp", []);
+
+		myApp.controller("myCtrl", function($scope){
+
+			$scope.$on("getImage", function(evt, data){
+				console.log(data);				
+			});
+			
+		});		
+
+		myApp.directive("demo", function () {
+			return {			
+				restrict: "E",
+				transclude: true,
+				template:"<p> Good </p><ng-transclude>"
+			};
+		});		
+
+		'use strict';
+
+		myApp.directive('fileUpload', function () {
+		    var directive =  {
+		      restrict: 'A',
+		      scope: {
+		        'uploadEventName': '@'
+		      },
+		      link: function(scope, element, attrs){
+		        element.on('change', function(event){
+		        	console.log("-----	", element[0].files);
+			        scope.$emit(scope.uploadEventName, element[0].files);
+		        });
+		      }
+		    }
+
+		    return directive;
+
+		  });
+
+
+	</script>
+</body>
+
+</html>
