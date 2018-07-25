@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS Day 6</title>	
+</head>
+<body ng-app="myApp">
+
+	<div style="margin-left: 30%" ng-controller="myCtrl">
+		<button ng-click="getName()">Get Name</button>
+		<button ng-click="getCity()">Get City</button>
+		{{ name }}
+		{{ city }}
+	</div>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.js"></script>
+
+	<script type="text/javascript">
+		var myApp = angular.module("myApp", []);
+
+		myApp.controller("myCtrl", function($scope, myService, myFactory){
+			
+
+			var name = "XYZ";
+
+			myService.setName(name);			
+
+			$scope.getName = function(){
+				$scope.name = myService.getName();
+			};	
+
+			var city = "Nagpur";
+
+			myFactory.setCity(city);			
+
+			$scope.getCity = function(){
+				$scope.city = myFactory.getCity();
+			};			
+		});	
+
+		myApp.service("myService", function(){
+
+			var x;
+
+			this.getName = function(){
+				return x;
+			}
+
+			this.setName = function(name){
+				x = name;
+			}
+
+		});
+
+		myApp.factory("myFactory", function(){
+
+			var obj = {};
+
+			var y;
+
+			obj.getCity = function(){
+				return y;
+			}
+
+			obj.setCity = function(city){
+				y = city;
+			}
+
+			return obj;
+
+		});			
+
+	</script>
+</body>
+
+</html>

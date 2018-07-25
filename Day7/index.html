@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS Day 7</title>	
+</head>
+<body ng-app="myApp">
+
+	<div ng-view=""></div>	
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.js"></script>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular-route.min.js"></script>
+
+	<script type="text/javascript">
+		var myApp = angular.module("myApp", ['ngRoute']);
+
+		myApp.config(function($httpProvider, $routeProvider){
+			$routeProvider.when("/", {
+				templateUrl: "hello.html",
+				controller: "myCtrl",
+				controllerAs: "my"
+			}).when("/home", {
+				templateUrl: "home.html",
+				controller: "myHomeCtrl",
+				controllerAs: "myHome"
+			}).otherwise("/");
+		});
+
+
+		myApp.controller("myCtrl", function($scope){		
+			myCt = this;
+			$scope.name = "ABC";		
+		});	
+
+		myApp.controller("myHomeCtrl", function($scope){		
+			myCt = this;
+			myCt.city = "Nagpur";		
+		});	
+
+		
+
+	</script>
+</body>
+
+</html>

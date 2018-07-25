@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS Day 6</title>	
+</head>
+<body ng-app="myApp">
+
+	<div style="margin-left: 30%" ng-controller="myCtrl">
+		<button ng-click="getUsers()">Get Users</button>
+
+		<table>
+			<tr>
+				<th>Name</th>
+			</tr>
+			<tr ng-repeat="user in users">
+				<td>{{ $index }} - {{user.first_name}}</td>
+			</tr>
+		</table>		
+	</div>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.js"></script>
+
+	<script type="text/javascript">
+		var myApp = angular.module("myApp", []);
+
+		myApp.config(function($httpProvider){
+			$httpProvider.interceptors.push("httpFact");
+
+			// $httpProvider.interceptors.push('responseHandler');
+		});
+
+		myApp.controller("myCtrl", function($scope, myFactory){			
+
+			$scope.getUsers = function(){
+				myFactory.getUsers().then(function(resp){
+					console.log(resp);
+					$scope.users = resp.data.data;
+				});				
+			};			
+		});	
+
+
+		myApp.factory("myFactory", function($http){
+
+			var obj = {};
+
+			var y;
+
+			obj.getUsers = function(){
+
+				return $http({
+					url: "https://reqres.in/api/users?page=1",
+					method: "GET"
+				});				
+			}			
+
+			return obj;
+
+		});		
+
+
+		myApp.factory("httpFact", function(){
+			var requestModifier = {
+	        request: function(config) {
+	        	console.log(config);
+		        if(config.url.slice(0, 4) === "http"){
+		          	var token = "qwertyuiop";
+		            config.headers['AuthToken'] = angular.copy(token);
+		        }
+		          return config;
+		        }
+		    };
+		    return requestModifier;			
+
+		});			
+
+	</script>
+</body>
+
+</html>

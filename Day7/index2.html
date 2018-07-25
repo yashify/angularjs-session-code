@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJS Day 7</title>	
+</head>
+<body ng-app="myApp">
+
+	<div ui-view=""></div>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.js"></script>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.19/angular-ui-router.min.js"></script>
+
+	
+
+	<script type="text/javascript">
+		var myApp = angular.module("myApp", ['ui.router']);
+
+		myApp.config(function($httpProvider, $stateProvider){
+
+			$stateProvider.state("index", {				
+				url:"/",
+				templateUrl: "hello.html",
+				controller: "myCtrl",
+				controllerAs: "my"
+			});
+
+			// $routeProvider.when("/", {
+			// 	templateUrl: "hello.html",
+			// 	controller: "myCtrl",
+			// 	controllerAs: "my"
+			// }).when("/home", {
+			// 	templateUrl: "home.html",
+			// 	controller: "myHomeCtrl",
+			// 	controllerAs: "myHome"
+			// }).otherwise("/");
+		});
+
+
+		myApp.controller("myCtrl", function($scope){		
+			myCt = this;
+			myCt.name = "ABC";		
+		});	
+
+		myApp.controller("myHomeCtrl", function($scope){		
+			myCt = this;
+			myCt.city = "Nagpur";		
+		});	
+
+		
+
+	</script>
+</body>
+
+</html>
